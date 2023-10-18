@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Donation Platform</title>
+</head>
+<body>
+    <div class="header">
+        <h1 id="title">Donation Platform</h1>
+        <p id="prompt">Choose your user group and log in or register below:</p>
+    </div>
+    <div class="container">
+        <div class="left">
+            <h2>Donor</h2>
+            <form action="/donor-login" method="post">
+                <label for="donor-username">Username:</label>
+                <input type="text" id="donor-username" name="donor-username">
+                <label for="donor-password">Password:</label>
+                <input type="password" id="donor-password" name="donor-password">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div class="right">
+            <h2>Charity</h2>
+            <form action="/charity-login" method="post">
+                <label for="charity-username">Username:</label>
+                <input type="text" id="charity-username" name="charity-username">
+                <label for="charity-password">Password:</label>
+                <input type="password" id="charity-password" name="charity-password">
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+    <p>Don't have an account yet? <a href="register.html">Register now</a></p>
+</body>
+</html>
