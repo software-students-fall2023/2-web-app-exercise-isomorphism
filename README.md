@@ -4,17 +4,17 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-To make donating clothes easy and fulfilling, connecting givers with charities for a better community.
+Our platform is dedicated to seamlessly bridging the gap between donors and charities, ensuring transparency, and ease of donation management.
 
 ## User stories
 [Issues](https://github.com/software-students-fall2023/2-web-app-exercise-isomorphism/issues)
-- As a donor, I want to easily upload photos and details of my clothes, so they quickly reach people who need them.
-- As a donor, I want a simple way to schedule donation pick-ups, so I can donate without disrupting my day.
-- As a donor, I want feedback on the impact of my donations, so I'm encouraged to keep giving.
-- As a donor, I want assurance of legitimate charities on the platform, so I trust where my donations go.
-- As a donor, I want clear info on my donations' environmental impact, so I know I'm making a difference.
-- As a charity, I want to see nearby available donations, so we can collect relevant items for our beneficiaries.
-- As a charity, I want to display our current needs, so donors know what items we truly need.
+- As a donor, I want to provide my donations so that I can support the causes I care - about.
+- As a donor, I want to edit my previous donations so that I ensure accuracy and update any necessary details.
+- As a donor, I want to delete any of my donations so that I can correct mistakes or change my mind about certain contributions.
+- As a charity, I want to search for donations based on specific criteria so that I can better manage and allocate resources.
+- As a donor, I want to view all of my donations in one place so that I can track my overall charitable contributions.
+- As a charity, I want to view all donations made to my organization so that I can effectively manage, acknowledge, and allocate the funds.
+- As a prospective donor or charity, I want to register on the platform so that I have the ability to either give or receive donations.
 
 ## Task boards
 
