@@ -8,7 +8,7 @@ Our platform is dedicated to seamlessly bridging the gap between donors and char
 
 ## User stories
 [Issues](https://github.com/software-students-fall2023/2-web-app-exercise-isomorphism/issues)
-- As a donor, I want to provide my donations so that I can support the causes I care - about.
+- As a donor, I want to provide my donations so that I can support the causes I care about.
 - As a donor, I want to edit my previous donations so that I ensure accuracy and update any necessary details.
 - As a donor, I want to delete any of my donations so that I can correct mistakes or change my mind about certain contributions.
 - As a charity, I want to search for donations based on specific criteria so that I can better manage and allocate resources.

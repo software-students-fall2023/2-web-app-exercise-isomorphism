@@ -1,6 +1,8 @@
+
 <html>
   <head>
-    <title>Registration</title>
+    <title>Registration Success</title>
+    <meta http-equiv="refresh" content="2;url={{ url_for('index_page') }}" />
   </head>
   <body>
     <form action="/register" method="post">
@@ -12,5 +14,6 @@
         <br>
         <input type="submit" value="Submit">
     </form>
+    <p>Registration successful! You will be redirected to the homepage shortly...</p>
   </body>
 </html>
