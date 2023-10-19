@@ -10,7 +10,14 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <br>
+        <label>Register as:</label>
+        <input type="radio" id="donor" name="user_type" value="donor" required>
+        <label for="donor">Donor</label>
+        <input type="radio" id="charity" name="user_type" value="charity">
+        <label for="charity">Charity</label>
+        <br>
         <input type="submit" value="Submit">
     </form>
   </body>
+  <a href="{{ url_for('index_page') }}">Back to home</a>
 </html>
