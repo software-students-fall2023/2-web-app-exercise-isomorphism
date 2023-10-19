@@ -9,6 +9,12 @@
         <label for="login-password">Password:</label>
         <input type="password" id="login-password" name="login-password" required>
         <br>
+        <label>Login as:</label>
+        <input type="radio" id="donor-login" name="login-user_type" value="donor" required>
+        <label for="donor-login">Donor</label>
+        <input type="radio" id="charity-login" name="login-user_type" value="charity">
+        <label for="charity-login">Charity</label>
+        <br>
         {% if error %}
             <p style="color: red;">{{ error }}</p>
         {% endif %}
