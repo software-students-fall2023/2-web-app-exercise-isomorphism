@@ -73,15 +73,40 @@
     <a href="/user_donation">donate</a>
     <a href="/user_cancels_donation">View personal donations</a>
 </nav>
+<div style="padding: 50px"></div>
 
-<section>
-    <div class="about-section">
-        <h2>About us</h2>
+<div style="background-color: white;width: 600px;margin: 0 auto;border-radius: 15px">
+    <div style="padding: 20px">
 
+        <form style="text-align: center" method="POST" action="/login">
 
-        <pre style="width: 100%; white-space: pre-wrap;font-size: 16px">{{ txt_content }}</pre>
+            <div>
+                <h1>Login</h1>
+            </div>
+            <div>
+                <p>username:<input type="text" name="username"></p>
+            </div>
 
+            <div>
+                <p>password:<input type="password" name="password"></p>
+            </div>
+
+            <button type="submit"
+                    style="background-color: #009688; color: #fff; border: none; padding: 10px 20px; font-size: 18px; border-radius: 5px; cursor: pointer;width: 250px">
+                Login
+            </button>
+
+            <div>
+                {% if code %}
+
+                    <p style="color: blue">Login Failure Account Password Error</p>
+
+                {% endif %}
+            </div>
+        </form>
     </div>
-</section>
+</div>
+
+
 </body>
 </html>
