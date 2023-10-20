@@ -73,15 +73,34 @@
     <a href="/user_donation">donate</a>
     <a href="/user_cancels_donation">View personal donations</a>
 </nav>
+<div style="padding: 50px"></div>
+
 
 <section>
     <div class="about-section">
-        <h2>About us</h2>
+
+        <form method="POST" action="/admin">
+            <div>
+                <h1>Edit website content</h1>
+            </div>
+            <div>
+                <h1 style="padding: 50px 0 0 0 ">About us</h1>
+                <textarea style="width: 100%; height: 400px; font-size: 16px;" name="infos">{{ txt_content }}</textarea>
 
 
-        <pre style="width: 100%; white-space: pre-wrap;font-size: 16px">{{ txt_content }}</pre>
+            </div>
+
+            <button type="submit"
+                    style="background-color: #009688; color: #fff; border: none; padding: 10px 20px; font-size: 18px; border-radius: 5px; cursor: pointer;width: 250px">
+                modify
+            </button>
+
+        </form>
+
 
     </div>
 </section>
+
+
 </body>
 </html>
