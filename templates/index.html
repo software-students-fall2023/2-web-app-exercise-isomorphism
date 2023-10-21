@@ -1,4 +1,9 @@
 <html>
+<head>
+    <link rel="stylesheet" href="../static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
     <h1>Welcome to our donation platform</h1>
 
     {% with messages = get_flashed_messages() %}
@@ -43,5 +48,5 @@
         </form>
         <p><a href="{{ url_for('register_page') }}">Register now</a></p>
     {% endif %}
-
+</body>
 </html>
