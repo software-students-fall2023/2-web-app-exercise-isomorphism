@@ -1,87 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Public Welfare Donation Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
+<html>
+    <h1>Welcome to our donation platform</h1>
 
-        header {
-            background-color: #009688;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flashes">
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
-        h1 {
-            font-size: 36px;
-            margin: 0;
-        }
+    {% if session.get('username') %}
+        <p>Welcome back, {{ session['username'] }}!</p>
+        {% if session['user_type'] == 'donor' %}
+            <p>Go to my <a href="{{ url_for('donor_home_page') }}">donor's home</a></p>
+        {% elif session['user_type'] == 'charity' %}
+            <p>Go to my <a href="{{ url_for('charity_home_page') }}">charity's home</a></p>
+        {% endif %}
+        
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+        <p>Or login with a different account below:</p>
+    {% else %}
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" name="login-username" required>
+            <br>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" name="login-password" required>
+            <br>
+            <label>Login as:</label>
+            <input type="radio" id="donor-login" name="login-user_type" value="donor" required>
+            <label for="donor-login">Donor</label>
+            <input type="radio" id="charity-login" name="login-user_type" value="charity">
+            <label for="charity-login">Charity</label>
+            <br>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <input type="submit" value="Login">
+        </form>
+        <p><a href="{{ url_for('register_page') }}">Register now</a></p>
+    {% endif %}
 
-        nav {
-            background-color: #00695c;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 10px;
-            font-size: 18px;
-        }
-
-        section {
-            padding: 20px;
-        }
-
-        .about-section {
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-section h2 {
-            font-size: 24px;
-        }
-
-        .about-section p {
-            font-size: 16px;
-            line-height: 1.5;
-        }
-    </style>
-</head>
-<body>
-<header>
-    <h1>Welcome to the charity donation website</h1>
-    <p>Let love spread and change the world</p>
-</header>
-
-<nav>
-    <a href="/">home page</a>
-    <a href="/user_public_donations">Public donations</a>
-    <a href='/login'>log on</a>
-    <a href="/register">register</a>
-    <a href="/user_donation">donate</a>
-    <a href="/user_cancels_donation">View personal donations</a>
-</nav>
-
-<section>
-    <div class="about-section">
-        <h2>About us</h2>
-
-
-        <pre style="width: 100%; white-space: pre-wrap;font-size: 16px">{{ txt_content }}</pre>
-
-    </div>
-</section>
-</body>
 </html>
