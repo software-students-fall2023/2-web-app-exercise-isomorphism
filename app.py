@@ -100,7 +100,7 @@ def add_donation():
         "type": donation_type,
         "recipient_age": recipient_age
     })
-    flash('Donation added successfully!')  # Send a success message
+    flash('Donation added successfully!') 
     return redirect(url_for('donor_home_page'))
 
 @app.route('/donor_view_donations')
@@ -137,7 +137,7 @@ def edit_donation(donation_id):
     return redirect(url_for('donor_view_donations'))
 
 @app.route('/delete_donation/<donation_id>', methods=['GET'])
-@login_required(user_types=['donor'])  # Ensure only donors can access this route
+@login_required(user_types=['donor']) 
 def delete_donation(donation_id):
     donation = db.donations.find_one({"_id": ObjectId(donation_id)})
     if donation and donation["donor_username"] == session['username']:
@@ -146,6 +146,50 @@ def delete_donation(donation_id):
     else:
         flash('Donation not found or you do not have permission to delete it!')
     return redirect(url_for('donor_view_donations'))
+
+@app.route('/view_all_donations', methods=['GET', 'POST'])
+@login_required(['charity'])
+def view_all_donations():
+    query = {}
+    if request.method == 'POST':
+        donor = request.form.get('donor')
+        name = request.form.get('name')
+        type = request.form.get('type')
+        age = request.form.get('age')
+        if donor:
+            query['donor_username'] = {'$regex': donor, '$options': 'i'} 
+        if name:
+            query['name'] = {'$regex': name, '$options': 'i'}
+        if type:
+            query['type'] = type
+        if age:
+            query['recipient_age'] = age
+    all_donations = db.donations.find(query)
+    return render_template('view_all_donations.html', donations = all_donations)
+
+@app.route('/accept_donation/<donation_id>')
+@login_required(['charity'])
+def accept_donation(donation_id):
+    donation = db.donations.find_one({"_id": ObjectId(donation_id)})
+    if not donation:
+        flash('Donation not found!')
+        return redirect(url_for('view_all_donations'))
+    db.charity_donations.insert_one({
+        "charity_username": session['username'],
+        "name": donation['name'],
+        "type": donation['type'],
+        "recipient_age": donation['recipient_age'],
+        "donor_username": donation['donor_username']
+    })
+    db.donations.delete_one({"_id": ObjectId(donation_id)})
+    flash('Donation accepted!')
+    return redirect(url_for('view_all_donations'))
+
+@app.route('/charity_accepted_donations')
+@login_required(['charity'])
+def charity_accepted_donations():
+    accepted_donations = db.charity_donations.find({"charity_username": session['username']})
+    return render_template('charity_accepted_donations.html', accepted_donations=accepted_donations)
     
 @app.route('/logout')
 def logout():
