@@ -75,7 +75,7 @@ def login():
             else:
                 return render_template('index.html', error = "Incorrect password.")
         else:
-            return render_template('index.html', error = "Usernname Not Found.")
+            return render_template('index.html', error = "Username Not Found.")
     elif user_type == "charity":
         charity = db.charities.find_one({"username": username})
         if charity:
@@ -86,7 +86,7 @@ def login():
             else:
                 return render_template('index.html', error = "Incorrect password.")
         else:
-            return render_template('index.html', error = "Usernname Not Found.")
+            return render_template('index.html', error = "Username Not Found.")
         
 @app.route('/add_donation', methods=['POST'])
 @login_required(['donor'])
