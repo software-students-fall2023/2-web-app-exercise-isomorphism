@@ -5,6 +5,9 @@
   <body>
     <h2>Title to implement!</h2>
     <p>Functions to implement</p>
+    <p>Welcome, {{ session['username'] }}!</p>
+    <a href="{{ url_for('index_page') }}">Back to home</a>
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
   </body>
-  <a href="{{ url_for('index_page') }}">Back to home</a>
 </html>

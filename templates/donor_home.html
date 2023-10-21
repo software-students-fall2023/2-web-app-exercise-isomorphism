@@ -3,8 +3,47 @@
     <title>Donor's Home!</title>
   </head>
   <body>
-    <h2>Title to implement</h2>
-    <p>Funtions to implement</p>
+    <h2>Welcome {{ session['username'] }}</h2>
+
+    <!-- Donation Form -->
+    <h3>Add a Donation:</h3>
+    <form action="/add_donation" method="post">
+        <label for="donation-name">Name of Donation:</label>
+        <input type="text" id="donation-name" name="donation_name" required>
+        <br>
+
+        <label for="donation-type">Donation Type:</label>
+        <select id="donation-type" name="donation_type">
+            <option value="clothes">Clothes</option>
+            <option value="food">Food</option>
+            <option value="toys">Toys</option>
+            <option value="other">Other</option>
+        </select>
+        <br>
+
+        <label for="recipient-age">Recipient Age Group:</label>
+        <select id="recipient-age" name="recipient_age">
+            <option value="kids">Kids</option>
+            <option value="teenagers">Teenagers</option>
+            <option value="adults">Adults</option>
+            <option value="elders">Elders</option>
+        </select>
+        <br>
+
+        <input type="submit" value="Add Donation">
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+            <li style = "color: blueviolet;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <a href="{{ url_for('donor_view_donations') }}">View My Donations</a>
+    <a href="{{ url_for('index_page') }}">Back to home</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
   </body>
-  <a href="{{ url_for('index_page') }}">Back to home</a>
 </html>

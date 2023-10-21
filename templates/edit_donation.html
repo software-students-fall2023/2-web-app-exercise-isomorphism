@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Edit Donation</title>
+</head>
+<body>
+    <h1>Edit Donation</h1>
+
+    <form action="{{ url_for('edit_donation', donation_id=donation._id) }}" method="post">
+        <label for="donation_name">Name:</label>
+        <input type="text" id="donation_name" name="donation_name" value="{{ donation.name }}" required>
+        <br>
+        <label for="donation_type">Type:</label>
+        <select id="donation_type" name="donation_type">
+            <option value="clothes" {% if donation.type == 'clothes' %}selected{% endif %}>Clothes</option>
+            <option value="food" {% if donation.type == 'food' %}selected{% endif %}>Food</option>
+            <option value="toys" {% if donation.type == 'toys' %}selected{% endif %}>Toys</option>
+            <option value="other" {% if donation.type == 'other' %}selected{% endif %}>Other</option>
+        </select>
+        <br>
+        <label for="recipient_age">Recipient Age:</label>
+        <select id="recipient_age" name="recipient_age">
+            <option value="kids" {% if donation.recipient_age == 'kids' %}selected{% endif %}>Kids</option>
+            <option value="teenagers" {% if donation.recipient_age == 'teenagers' %}selected{% endif %}>Teenagers</option>
+            <option value="adults" {% if donation.recipient_age == 'adults' %}selected{% endif %}>Adults</option>
+            <option value="elders" {% if donation.recipient_age == 'elders' %}selected{% endif %}>Elders</option>
+        </select>
+        <br>
+        <input type="submit" value="Update Donation">
+    </form>
+
+    <a href="{{ url_for('donor_view_donations') }}">Back to View Donations</a>
+</body>
+</html>
