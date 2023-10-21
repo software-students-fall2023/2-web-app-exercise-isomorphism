@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>My Accepted Donations</title>
+</head>
+<body>
+    <h1>Accepted Donations</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Age</th>
+                <th>Donated By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donation in accepted_donations %}
+            <tr>
+                <td>{{ donation.name }}</td>
+                <td>{{ donation.type }}</td>
+                <td>{{ donation.recipient_age }}</td>
+                <td>{{ donation.donor_username }}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flashes">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('charity_home_page') }}">Back to Home</a>
+</body>
+</html>
