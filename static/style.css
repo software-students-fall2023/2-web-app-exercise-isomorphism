@@ -1,0 +1,14 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/*fit with screen width no less than 600px*/
+@media only screen and (max-width: 600px) {
+
+  body { font: normal 100% Helvetica, Arial, sans-serif; }
+
+  .main { float: right; width: 70%; }
+
+}
