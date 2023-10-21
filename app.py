@@ -100,7 +100,7 @@ def add_donation():
         "type": donation_type,
         "recipient_age": recipient_age
     })
-    flash('Donation added successfully!')
+    flash('Donation added successfully!')  # Send a success message
     return redirect(url_for('donor_home_page'))
 
 @app.route('/donor_view_donations')
@@ -137,7 +137,7 @@ def edit_donation(donation_id):
     return redirect(url_for('donor_view_donations'))
 
 @app.route('/delete_donation/<donation_id>', methods=['GET'])
-@login_required(user_types=['donor'])
+@login_required(user_types=['donor'])  # Ensure only donors can access this route
 def delete_donation(donation_id):
     donation = db.donations.find_one({"_id": ObjectId(donation_id)})
     if donation and donation["donor_username"] == session['username']:
