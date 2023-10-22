@@ -1,65 +1,150 @@
 <html>
 <head>
     <title>All Donations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-form label {
+            margin-bottom: 5px;
+        }
+
+        .table-results {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-results th, .table-results td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .table-results th {
+            background-color: #f2f2f2;
+        }
+
+        .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+        .button:hover {
+            background-color: darkmagenta;
+        }
+        @media screen and (max-width: 600px) {
+            form input[type="text"], form select {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            table td {
+                white-space: normal;
+            }
+            table, form {
+                font-size: 0.9em;
+            }
+            table tbody td:nth-child(2) {
+                max-width: 80px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
 </head>
-<body>
-    <h1>All Donations</h1>
+<div class="container">
+    <body>
+        <h1>All Donations</h1>
 
-    <h3>Search Donations:</h3>
-    <form action="{{ url_for('view_all_donations') }}" method="post">
-        Donor: <input type="text" name="donor">
-        Name: <input type="text" name="name">
-        Type: 
-        <select name="type">
-            <option value="">Any</option>
-            <option value="clothes">Clothes</option>
-            <option value="food">Food</option>
-            <option value="toys">Toys</option>
-            <option value="other">Other</option>
-        </select>
-        Age:
-        <select name="age">
-            <option value="">Any</option>
-            <option value="kids">Kids</option>
-            <option value="teenagers">Teenagers</option>
-            <option value="adults">Adults</option>
-            <option value="elders">Elders</option>
-        </select>
-        <input type="submit" value="Search">
-    </form>
+        <h3>Search Donations:</h3>
+        <form action="{{ url_for('view_all_donations') }}" method="post" class="search-form">
+            <div>
+                <label for="donor">Donor</label>
+                <input type="text" id="donor" name="donor">
+            </div>
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="type">Type</label>
+                <select id="type" name="type">
+                    <option value="">Any</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="food">Food</option>
+                    <option value="toys">Toys</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div>
+                <label for="age">Age</label>
+                <select id="age" name="age">
+                    <option value="">Any</option>
+                    <option value="kids">Kids</option>
+                    <option value="teenagers">Teenagers</option>
+                    <option value="adults">Adults</option>
+                    <option value="elders">Elders</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Search">
+            </div>
+        </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Donor</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Age</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for donation in donations %}
-            <tr>
-                <td>{{ donation.donor_username }}</td>
-                <td>{{ donation.name }}</td>
-                <td>{{ donation.type }}</td>
-                <td>{{ donation.recipient_age }}</td>
-                <td><a href="{{ url_for('accept_donation', donation_id=donation._id) }}" onclick="return confirm('Are you sure you want to accept this donation?');">Accept</a></td>
-            </tr>
+        <table class="table-results">
+            <thead>
+                <tr>
+                    <th>Donor</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Age</th>
+                    <th>Accept</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donation in donations %}
+                <tr>
+                    <td>{{ donation.donor_username }}</td>
+                    <td>{{ donation.name }}</td>
+                    <td>{{ donation.type }}</td>
+                    <td>{{ donation.recipient_age }}</td>
+                    <td><a href="{{ url_for('accept_donation', donation_id=donation._id) }}" onclick="return confirm('Are you sure you want to accept this donation?');">Accept</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li style = "color: blueviolet;">{{ message }}</li>
             {% endfor %}
-        </tbody>
-    </table>
+            </ul>
+        {% endif %}
+        {% endwith %}
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-            <li style = "color: blueviolet;">{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+        <a href="{{ url_for('charity_home_page') }}" class="button">Back to Charity Home</a>
+    </body>
+</div>
 
-    <a href="{{ url_for('charity_home_page') }}">Back to Charity Home</a>
-</body>
 </html>

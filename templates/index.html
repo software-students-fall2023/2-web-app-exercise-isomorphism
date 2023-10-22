@@ -1,47 +1,93 @@
 <html>
-    <h1>Welcome to our donation platform</h1>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <style>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="flashes">
-                {% for message in messages %}
-                    <p style="color: red;">{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
+            .center {
+                text-align: center;
+            }
 
-    {% if session.get('username') %}
-        <p>Welcome back, {{ session['username'] }}!</p>
-        {% if session['user_type'] == 'donor' %}
-            <p>Go to my <a href="{{ url_for('donor_home_page') }}">donor's home</a></p>
-        {% elif session['user_type'] == 'charity' %}
-            <p>Go to my <a href="{{ url_for('charity_home_page') }}">charity's home</a></p>
-        {% endif %}
-        
-        <p><a href="{{ url_for('logout') }}">Logout</a></p>
-        <p>Or login with a different account below:</p>
-    {% else %}
-        <h2>Login</h2>
-        <form action="/login" method="post">
-            <label for="login-username">Username:</label>
-            <input type="text" id="login-username" name="login-username" required>
-            <br>
-            <label for="login-password">Password:</label>
-            <input type="password" id="login-password" name="login-password" required>
-            <br>
-            <label>Login as:</label>
-            <input type="radio" id="donor-login" name="login-user_type" value="donor" required>
-            <label for="donor-login">Donor</label>
-            <input type="radio" id="charity-login" name="login-user_type" value="charity">
-            <label for="charity-login">Charity</label>
-            <br>
-            {% if error %}
-                <p style="color: red;">{{ error }}</p>
+            .radio-group input[type="radio"],
+            .radio-group label {
+                display: inline-block;
+                margin-right: 5px; 
+            }
+
+            .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+            .button:hover {
+                background-color: darkmagenta;
+            }
+        </style>
+    </head>
+    <div class="container">
+        <h1>Welcome to our donation platform</h1>
+
+        {% with messages = get_flashed_messages(category_filter=["info"]) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for message in messages %}
+                        <p style="color: red;">{{ message }}</p>
+                    {% endfor %}
+                </div>
             {% endif %}
-            <input type="submit" value="Login">
-        </form>
-        <p><a href="{{ url_for('register_page') }}">Register now</a></p>
-    {% endif %}
+        {% endwith %}
+
+        {% if session.get('username') %}
+            <p>Welcome back, {{ session['username'] }}!</p>
+            {% if session['user_type'] == 'donor' %}
+                <p>Go to my <a href="{{ url_for('donor_home_page') }}" class="button">donor's home</a></p>
+            {% elif session['user_type'] == 'charity' %}
+                <p>Go to my <a href="{{ url_for('charity_home_page') }}" class="button">charity's home</a></p>
+            {% endif %}
+            
+            <p><a href="{{ url_for('logout') }}" class="button">Logout</a></p>
+            <p>Please log out first if you want to switch account</p>
+        {% else %}
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="login-username" required>
+                <br>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+                <br>
+                <div class="radio-group">
+                    <label>Login as:</label>
+                    <input type="radio" id="donor-login" name="login-user_type" value="donor" required>
+                    <label for="donor-login">Donor</label>
+                    <input type="radio" id="charity-login" name="login-user_type" value="charity">
+                    <label for="charity-login">Charity</label>
+                </div>
+                <br>
+                {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                    {% if messages %}
+                        <div class="flashes">
+                            {% for message in messages %}
+                                <p style="color: red;">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="center">
+                    <input type="submit" value="Login">
+                </div>
+                
+            </form>
+            <p><a href="{{ url_for('register_page') }}" class="button">Register now</a></p>
+        {% endif %}
+    </div>
+    
 
 </html>

@@ -18,10 +18,10 @@ def login_required(user_types=None):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             if 'username' not in session:
-                flash('Please login to access this page.')
+                flash('Please login to access this page.', "info")
                 return redirect(url_for('display_login'))
             elif session.get('user_type') not in user_types:
-                flash('You do not have permission to access this page.')
+                flash('You do not have permission to access this page.', "info")
                 return redirect(url_for('index_page'))
             return f(*args, **kwargs)
         return decorated_function
@@ -73,9 +73,11 @@ def login():
                 session['username'] = username
                 return redirect(url_for('donor_home_page'))
             else:
-                return render_template('index.html', error = "Incorrect password.")
+                flash("Incorrect password.", "error")
+                return redirect(url_for('display_login'))
         else:
-            return render_template('index.html', error = "Username Not Found.")
+            flash("Username Not Found.", "error")
+            return redirect(url_for('display_login'))
     elif user_type == "charity":
         charity = db.charities.find_one({"username": username})
         if charity:
@@ -84,9 +86,11 @@ def login():
                 session['username'] = username
                 return redirect(url_for('charity_home_page'))
             else:
-                return render_template('index.html', error = "Incorrect password.")
+                flash("Incorrect password.", "error")
+                return redirect(url_for('display_login'))
         else:
-            return render_template('index.html', error = "Username Not Found.")
+            flash("Username Not Found.", "error")
+            return redirect(url_for('display_login'))
         
 @app.route('/add_donation', methods=['POST'])
 @login_required(['donor'])
@@ -150,12 +154,12 @@ def delete_donation(donation_id):
 @app.route('/view_all_donations', methods=['GET', 'POST'])
 @login_required(['charity'])
 def view_all_donations():
-    query = {}
     if request.method == 'POST':
         donor = request.form.get('donor')
         name = request.form.get('name')
         type = request.form.get('type')
         age = request.form.get('age')
+        query = {}
         if donor:
             query['donor_username'] = {'$regex': donor, '$options': 'i'} 
         if name:
@@ -164,8 +168,10 @@ def view_all_donations():
             query['type'] = type
         if age:
             query['recipient_age'] = age
-    all_donations = db.donations.find(query)
-    return render_template('view_all_donations.html', donations = all_donations)
+        session['search_query'] = query
+        return redirect(url_for('view_all_donations'))
+    all_donations = db.donations.find(session.get('search_query', {}))
+    return render_template('view_all_donations.html', donations=all_donations)
 
 @app.route('/accept_donation/<donation_id>')
 @login_required(['charity'])

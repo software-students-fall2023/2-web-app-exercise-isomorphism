@@ -1,33 +1,74 @@
 <html>
 <head>
     <title>Edit Donation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .center {
+            text-align: center;
+        }
+        .center-button {
+          display: flex;
+          justify-content: center; 
+          margin-top: 20px;
+        }
+        .dropdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+        }
+        .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+        .button:hover {
+            background-color: darkmagenta;
+        }
+    </style>
 </head>
-<body>
-    <h1>Edit Donation</h1>
+<div class="container">
+    <body>
+        <h1>Edit Donation</h1>
 
-    <form action="{{ url_for('edit_donation', donation_id=donation._id) }}" method="post">
-        <label for="donation_name">Name:</label>
-        <input type="text" id="donation_name" name="donation_name" value="{{ donation.name }}" required>
-        <br>
-        <label for="donation_type">Type:</label>
-        <select id="donation_type" name="donation_type">
-            <option value="clothes" {% if donation.type == 'clothes' %}selected{% endif %}>Clothes</option>
-            <option value="food" {% if donation.type == 'food' %}selected{% endif %}>Food</option>
-            <option value="toys" {% if donation.type == 'toys' %}selected{% endif %}>Toys</option>
-            <option value="other" {% if donation.type == 'other' %}selected{% endif %}>Other</option>
-        </select>
-        <br>
-        <label for="recipient_age">Recipient Age:</label>
-        <select id="recipient_age" name="recipient_age">
-            <option value="kids" {% if donation.recipient_age == 'kids' %}selected{% endif %}>Kids</option>
-            <option value="teenagers" {% if donation.recipient_age == 'teenagers' %}selected{% endif %}>Teenagers</option>
-            <option value="adults" {% if donation.recipient_age == 'adults' %}selected{% endif %}>Adults</option>
-            <option value="elders" {% if donation.recipient_age == 'elders' %}selected{% endif %}>Elders</option>
-        </select>
-        <br>
-        <input type="submit" value="Update Donation">
-    </form>
+        <form action="{{ url_for('edit_donation', donation_id=donation._id) }}" method="post">
+            <label for="donation_name">Name:</label>
+            <input type="text" id="donation_name" name="donation_name" value="{{ donation.name }}" required>
+            <br>
+            <div class="dropdown-container">
+                <div>
+                     <label for="donation_type">Type:</label>
+                    <select id="donation_type" name="donation_type">
+                        <option value="clothes" {% if donation.type == 'clothes' %}selected{% endif %}>Clothes</option>
+                        <option value="food" {% if donation.type == 'food' %}selected{% endif %}>Food</option>
+                        <option value="toys" {% if donation.type == 'toys' %}selected{% endif %}>Toys</option>
+                        <option value="other" {% if donation.type == 'other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="recipient_age">Recipient Age:</label>
+                    <select id="recipient_age" name="recipient_age">
+                        <option value="kids" {% if donation.recipient_age == 'kids' %}selected{% endif %}>Kids</option>
+                        <option value="teenagers" {% if donation.recipient_age == 'teenagers' %}selected{% endif %}>Teenagers</option>
+                        <option value="adults" {% if donation.recipient_age == 'adults' %}selected{% endif %}>Adults</option>
+                        <option value="elders" {% if donation.recipient_age == 'elders' %}selected{% endif %}>Elders</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="center">
+                <input type="submit" value="Update Donation">
+            </div>
+        </form>
+        <a href="{{ url_for('donor_view_donations') }}" class="button">Back to View Donations</a>
+    </body>
+</div>
 
-    <a href="{{ url_for('donor_view_donations') }}">Back to View Donations</a>
-</body>
 </html>

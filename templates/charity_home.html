@@ -1,13 +1,41 @@
 <html>
   <head>
     <title>Charity's Home!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 20px 40px 40px 40px; /* Adjusted the top margin to 20px */
+          background-color: #f4f4f4;
+          color: #333;
+      }
+      .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+      .button:hover {
+          background-color: darkmagenta;
+      }
+    </style>
   </head>
+
   <body>
-    <h2>Welcome {{ session['username'] }}</h2>
-    <p><a href="{{ url_for('view_all_donations') }}">View All Donations</a></p>
-    <p><a href="{{ url_for('charity_accepted_donations') }}">View My Accepted Donations</a></p>
-    <a href="{{ url_for('index_page') }}">Back to home</a>
-    <br>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <div class="container center">
+      <h2>Welcome, {{ session['username'] }}</h2>
+      <h3>You can choose from one of the options below</h3>
+      <a href="{{ url_for('view_all_donations') }}" class="button">View All Donations</a>
+      <a href="{{ url_for('charity_accepted_donations') }}" class="button">View My Accepted Donations</a>
+      <a href="{{ url_for('index_page') }}" class="button">Back to Home</a>
+      <a href="{{ url_for('logout') }}" class="button">Logout</a>
+    </div>
   </body>
 </html>

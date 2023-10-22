@@ -1,19 +1,37 @@
-
 <html>
   <head>
     <title>Registration Success</title>
     <meta http-equiv="refresh" content="2;url={{ url_for('index_page') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .center {
+        background-color: #fff;
+        padding: 20px 30px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+        font-size: 18px;
+        text-align: center;
+        margin: 0;
+      }
+    </style>
   </head>
-  <body>
-    <form action="/register" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
-    <p>Registration successful! You will be redirected to the homepage shortly...</p>
-  </body>
+  <div class="center">
+    <body>
+      <p style="color: blueviolet">Registration successful! You will be redirected to the homepage shortly...</p>
+    </body>
+  </div>
 </html>
