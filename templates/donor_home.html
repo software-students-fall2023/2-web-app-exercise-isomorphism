@@ -1,49 +1,83 @@
 <html>
   <head>
     <title>Donor's Home!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      .center-button {
+          display: flex;
+          justify-content: center; 
+          margin-top: 20px;
+      }
+      .dropdown-container {
+          display: flex;
+          justify-content: center;
+          gap: 20px; 
+      }
+      .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+        .button:hover {
+            background-color: darkmagenta;
+        }
+    </style>
   </head>
-  <body>
-    <h2>Welcome {{ session['username'] }}</h2>
+  <div class="container">
+    <body>
+      <h2>Welcome, {{ session['username'] }}</h2>
+      <h3>Add a Donation:</h3>
+      <form action="/add_donation" method="post">
+          <label for="donation-name">Name of Donation:</label>
+          <input type="text" id="donation-name" name="donation_name" required>
+          <br>
+          <div class="dropdown-container">
+            <div>
+              <label for="donation-type">Donation Type:</label>
+              <select id="donation-type" name="donation_type">
+                  <option value="clothes">Clothes</option>
+                  <option value="food">Food</option>
+                  <option value="toys">Toys</option>
+                  <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="recipient-age">Recipient Age Group:</label>
+              <select id="recipient-age" name="recipient_age">
+                  <option value="kids">Kids</option>
+                  <option value="teenagers">Teenagers</option>
+                  <option value="adults">Adults</option>
+                  <option value="elders">Elders</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="center-button">
+            <input type="submit" value="Add Donation">
+          </div>
+      </form>
 
-    <!-- Donation Form -->
-    <h3>Add a Donation:</h3>
-    <form action="/add_donation" method="post">
-        <label for="donation-name">Name of Donation:</label>
-        <input type="text" id="donation-name" name="donation_name" required>
-        <br>
-
-        <label for="donation-type">Donation Type:</label>
-        <select id="donation-type" name="donation_type">
-            <option value="clothes">Clothes</option>
-            <option value="food">Food</option>
-            <option value="toys">Toys</option>
-            <option value="other">Other</option>
-        </select>
-        <br>
-
-        <label for="recipient-age">Recipient Age Group:</label>
-        <select id="recipient-age" name="recipient_age">
-            <option value="kids">Kids</option>
-            <option value="teenagers">Teenagers</option>
-            <option value="adults">Adults</option>
-            <option value="elders">Elders</option>
-        </select>
-        <br>
-
-        <input type="submit" value="Add Donation">
-    </form>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-            <li style = "color: blueviolet;">{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <a href="{{ url_for('donor_view_donations') }}">View My Donations</a>
-    <a href="{{ url_for('index_page') }}">Back to home</a>
-    <a href="{{ url_for('logout') }}">Logout</a>
-  </body>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+              <li style = "color: blueviolet;">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <a href="{{ url_for('donor_view_donations') }}" class="button">View My Donations</a>
+      <a href="{{ url_for('index_page') }}" class="button">Back to home</a>
+      <a href="{{ url_for('logout') }}" class="button">Logout</a>
+    </body>
+  </div>
 </html>

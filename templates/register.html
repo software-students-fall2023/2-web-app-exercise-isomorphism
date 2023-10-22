@@ -1,8 +1,38 @@
 <html>
   <head>
     <title>Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+      .center {
+                text-align: center;
+            }
+
+            .radio-group input[type="radio"],
+            .radio-group label {
+                display: inline-block;
+                margin-right: 5px; 
+            }
+
+            .button {
+                display: inline-block;
+                padding: 5px 10px;
+                margin-top: 10px;
+                background-color: blueviolet;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+
+            .button:hover {
+                background-color: darkmagenta;
+            }
+    </style>
   </head>
-  <body>
+  <div class="container">
+    <body>
+    <h2>Register</h2>
     <form action="/register" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
@@ -10,14 +40,20 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <br>
-        <label>Register as:</label>
-        <input type="radio" id="donor" name="user_type" value="donor" required>
-        <label for="donor">Donor</label>
-        <input type="radio" id="charity" name="user_type" value="charity">
-        <label for="charity">Charity</label>
+        <div class="radio-group">
+          <label>Register as:</label>
+          <input type="radio" id="donor" name="user_type" value="donor" required>
+          <label for="donor">Donor</label>
+          <input type="radio" id="charity" name="user_type" value="charity">
+          <label for="charity">Charity</label>
+        </div>
         <br>
-        <input type="submit" value="Submit">
+        <div class="center">
+          <input type="submit" value="Submit">
+        </div>
     </form>
   </body>
-  <a href="{{ url_for('index_page') }}">Back to home</a>
+  <a href="{{ url_for('index_page') }}" class="button">Back to home</a>
+  </div>
+  
 </html>
