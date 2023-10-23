@@ -69,6 +69,19 @@
                 overflow-x: auto;
             }
         }
+
+        .flashes p {
+            background-color: #d7eaf8;
+            border: 1px solid #c6d6f5;
+            color: blueviolet;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 20px 0;
+            text-align: center; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
     </style>
 </head>
 <div class="container">
@@ -135,11 +148,11 @@
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul class=flashes>
+            <div class=flashes>
             {% for message in messages %}
-                <li style = "color: blueviolet;">{{ message }}</li>
+                <p >{{ message }}</p>
             {% endfor %}
-            </ul>
+            </div>
         {% endif %}
         {% endwith %}
 
