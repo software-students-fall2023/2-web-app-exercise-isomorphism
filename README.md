@@ -21,6 +21,14 @@ Our platform is dedicated to seamlessly bridging the gap between donors and char
 [Task Board 1](https://github.com/orgs/software-students-fall2023/projects/1)  
 [Task Board 2](https://github.com/orgs/software-students-fall2023/projects/50)
 
+## Wireframe Diagrams
+
+Below is a picture of the wireframe diagrams of every screen in our web-app. Click <a href="https://www.figma.com/file/a4po86jb2PVBINnBHGJK7E/Web-app-Wireframe?type=design&node-id=0%3A1&mode=design&t=j8l7ER7pJAsmRHWe-1">here</a> or the picture to view it on figma.
+<a href="https://www.figma.com/file/a4po86jb2PVBINnBHGJK7E/Web-app-Wireframe?type=design&node-id=0%3A1&mode=design&t=j8l7ER7pJAsmRHWe-1"><img src="./Source/Web-app Wireframe.png" alt="Wireframe Diagrams"></a>
+
+## Clickable Prototype
+Click <a href="https://www.figma.com/proto/v0R17h3kCdhe4WRDq79qus/Web-app-prototype?type=design&t=ImL5yvzxmWl4lq9I-1&scaling=scale-down&page-id=0%3A1&starting-point-node-id=13%3A2&node-id=13-2&mode=design">here</a> to try our prototype.
+
 ## How to Run Our Web-App
 
 ### Prerequisites
@@ -76,7 +84,7 @@ After setting up MongoDB, you can start the web-app (ensure running this command
 python app.py
 ```
 
-The web-app should now be running on `http://127.0.0.1:5000/`. Open the link in your preferred web browser.
+The web-app should now be running on http://127.0.0.1:5000/. Open the link in your preferred web browser.
 
 ### Functionality Breakdown
 
